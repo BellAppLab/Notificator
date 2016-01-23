@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03993BFC64C27DDEADFE0965E2CD01AD /* Pods-Notificator_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CB0166A7E57563B87385A87BBAB5F9BB /* Pods-Notificator_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F92BF7809272C1C2BB9A00C6283451B /* ReplaceMe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AD3B3BD33D162ED49729907AC98AE /* ReplaceMe.swift */; };
+		1F92BF7809272C1C2BB9A00C6283451B /* Notificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AD3B3BD33D162ED49729907AC98AE /* Notificator.swift */; };
 		2DDF3701A56CF405ED486BA3753F10CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		3D35B4E15E991C2DD8B3A5E56526FEC3 /* Pods-Notificator_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DFCE2F8418616F647561A9474E15DB10 /* Pods-Notificator_Example-dummy.m */; };
 		410822A8E169D6444977CF4047FDA50C /* Notificator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 36ED59E6A5E7FBE98CE4BB50135FB1B1 /* Notificator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -16,6 +16,7 @@
 		51BF94C3DD9254B8039DD365AA8AE091 /* Pods-Notificator_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D1878A03F0CD8AC28DC103BE65B5E752 /* Pods-Notificator_Tests-dummy.m */; };
 		54E5CEA76F5AB8EB6498483117A29EB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		5529286121255E1FF2402413B72D6B9D /* Notificator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F272FD5CC66A717F1780118DE400F2D /* Notificator-dummy.m */; };
+		65D6F8B71C5378EF0001B6EA /* UIApplication+Notificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D6F8B61C5378EF0001B6EA /* UIApplication+Notificator.swift */; };
 		8115D1B6C2AD5C8C98D71B21CF17CBC6 /* Notificator.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A859705422CF9C49F258769FA780D40B /* Notificator.bundle */; };
 		DC7A4FE60E70BB27BC2B192A9430415E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		4E251A1709E8726138F78FFF610C893C /* Notificator.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Notificator.modulemap; sourceTree = "<group>"; };
 		4F05799F59EFC1ADF85F9C2323441D69 /* Pods_Notificator_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notificator_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E0E45EDE5335E784C3F1BB7EF07F80 /* Pods-Notificator_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Notificator_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		65D6F8B61C5378EF0001B6EA /* UIApplication+Notificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Notificator.swift"; sourceTree = "<group>"; };
 		67875B0B163CD66CEC39935E0EAEF1FD /* Pods-Notificator_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Notificator_Tests.modulemap"; sourceTree = "<group>"; };
 		67C5CB284F9AC01307B5667BCFE22727 /* Notificator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Notificator.xcconfig; sourceTree = "<group>"; };
 		6B6DBAE0456F6F3F2930DC527AD2A6EC /* Pods-Notificator_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Notificator_Example-resources.sh"; sourceTree = "<group>"; };
@@ -76,7 +78,7 @@
 		E6097819FA8164A6528BBF831C545B25 /* Pods-Notificator_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Notificator_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E6200F0725F678B182C744073D2FB2FA /* Notificator-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Notificator-prefix.pch"; sourceTree = "<group>"; };
 		E82C309CB4D031E3301C27509D4E6926 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA5AD3B3BD33D162ED49729907AC98AE /* ReplaceMe.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReplaceMe.swift; sourceTree = "<group>"; };
+		FA5AD3B3BD33D162ED49729907AC98AE /* Notificator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Notificator.swift; sourceTree = "<group>"; };
 		FEDFB86320C638F27E9B1705F8373A5E /* Pods_Notificator_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Notificator_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -118,7 +120,8 @@
 		08DCE8F64CDFB8C4CA6F971F79F81F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FA5AD3B3BD33D162ED49729907AC98AE /* ReplaceMe.swift */,
+				FA5AD3B3BD33D162ED49729907AC98AE /* Notificator.swift */,
+				65D6F8B61C5378EF0001B6EA /* UIApplication+Notificator.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -416,7 +419,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5529286121255E1FF2402413B72D6B9D /* Notificator-dummy.m in Sources */,
-				1F92BF7809272C1C2BB9A00C6283451B /* ReplaceMe.swift in Sources */,
+				1F92BF7809272C1C2BB9A00C6283451B /* Notificator.swift in Sources */,
+				65D6F8B71C5378EF0001B6EA /* UIApplication+Notificator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
