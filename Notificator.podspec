@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Notificator"
-  s.version          = "0.1.1"
+  s.version          = "0.1.2"
   s.summary          = "Display notifications in your app using auto layout and Swift."
   s.description      = <<-DESC
 Display notifications in your app using auto layout and Swift. Inspired by https://github.com/hyperoslo/Whisper and https://github.com/sferrini/SFSwiftNotification

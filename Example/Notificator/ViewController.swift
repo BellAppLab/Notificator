@@ -31,7 +31,7 @@ class ViewController: UIViewController, Notificator {
 //        self.notify(view, expiringAfter: 1)
     }
 
-    func didTapNotification() {
+    func didTapNotification(notificatorView: NotificatorView) {
         print("Did tap")
     }
 }
