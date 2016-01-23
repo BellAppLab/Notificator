@@ -2,7 +2,7 @@ import Foundation
 
 
 @objc public protocol Notificator: AnyObject {
-    func didTapNotification()
+    func didTapNotification(notificatorView: NotificatorView)
 }
 
 
@@ -67,7 +67,7 @@ public class NotificatorView: UIView
     @objc final func handleGestures(sender: UIGestureRecognizer) {
         if sender == self.tap {
             dispatch_async(dispatch_get_main_queue()) { [unowned self] () -> Void in
-                self.notificator?.didTapNotification()
+                self.notificator?.didTapNotification(self)
             }
             if !self.dismissesWithTap {
                 return
