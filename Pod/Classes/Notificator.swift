@@ -48,8 +48,8 @@ public class NotificatorView: UIView
         
         NSLayoutConstraint.activateConstraints(self.notificatorConstraints)
         
-        self.tap = UITapGestureRecognizer(target: self, action: "handleGestures:")
-        self.swipe = UISwipeGestureRecognizer(target: self, action: "handleGestures:")
+        self.tap = UITapGestureRecognizer(target: self, action: #selector(NotificatorView.handleGestures(_:)))
+        self.swipe = UISwipeGestureRecognizer(target: self, action: #selector(NotificatorView.handleGestures(_:)))
         self.swipe.direction = .Up
     }
     

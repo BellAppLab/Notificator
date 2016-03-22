@@ -215,7 +215,7 @@ private extension NSTimer
     static func startNotificationTimer(application: UIApplication, _ time: NSTimeInterval) {
         self.stopNotificationTimer()
         
-        self.notificationTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: application, selector: "handleNotificatorTimer:", userInfo: nil, repeats: false)
+        self.notificationTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: application, selector: #selector(UIApplication.handleNotificatorTimer(_:)), userInfo: nil, repeats: false)
     }
     
     static func stopNotificationTimer() {
