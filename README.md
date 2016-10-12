@@ -1,28 +1,23 @@
 # Notificator
 
-[![CI Status](http://img.shields.io/travis/Bell App Lab/Notificator.svg?style=flat)](https://travis-ci.org/Bell App Lab/Notificator)
-[![Version](https://img.shields.io/cocoapods/v/Notificator.svg?style=flat)](http://cocoapods.org/pods/Notificator)
-[![License](https://img.shields.io/cocoapods/l/Notificator.svg?style=flat)](http://cocoapods.org/pods/Notificator)
-[![Platform](https://img.shields.io/cocoapods/p/Notificator.svg?style=flat)](http://cocoapods.org/pods/Notificator)
+Display notifications in your app using auto layout and Swift. 
+
+_v0.3.0_
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+
 
 ## Requirements
 
-iOS 8.0+
+* iOS 8.0+
+* Swift 3.0
 
 ## Installation
 
-### CocoaPods
+### Cocoapods
 
-Notificator is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod "Notificator"
-```
+Because of [this](http://stackoverflow.com/questions/39637123/cocoapods-app-xcworkspace-does-not-exists), I've dropped support for Cocoapods on this repo. I cannot have production code rely on a dependency manager that breaks this badly. 
 
 ### Git Submodules
 
@@ -34,10 +29,10 @@ To install Notificator using git submodules:
 
 ```
 cd toYourProjectsFolder
-git submodule add -b Submodule --name Notificator https://github.com/BellAppLab/Notificator.git
+git submodule add -b submodule --name Notificator https://github.com/BellAppLab/Notificator.git
 ```
 
-Navigate to the new Notificator folder and drag the Pods folder to your Xcode project.
+Navigate to the new Notificator folder and drag the `Source` folder to your Xcode project.
 
 ## Author
 

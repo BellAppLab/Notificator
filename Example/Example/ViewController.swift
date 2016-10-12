@@ -1,13 +1,4 @@
-//
-//  ViewController.swift
-//  Notificator
-//
-//  Created by Bell App Lab on 01/22/2016.
-//  Copyright (c) 2016 Bell App Lab. All rights reserved.
-//
-
 import UIKit
-import Notificator
 
 
 class ViewController: UIViewController, Notificator {
