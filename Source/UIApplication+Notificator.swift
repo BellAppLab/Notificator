@@ -4,12 +4,14 @@ import UIKit
 internal extension UIApplication
 {
     static var notifying: Bool {
-        return self.sharedApplication().notificatorView != nil
+        return self.shared
+            
+            .notificatorView != nil
     }
     
     private final var rootView: UIView? {
         guard let controller = self.keyWindow?.rootViewController else { return nil }
-        if controller.isViewLoaded() {
+        if controller.isViewLoaded {
             return controller.view
         }
         return nil
@@ -25,16 +27,16 @@ internal extension UIApplication
         return nil
     }
     
-    final func notify(view: NotificatorView, _ expiration: NSTimeInterval)
+    final func notify(_ view: NotificatorView, _ expiration: TimeInterval)
     {
         guard let rootView = self.rootView else { return }
         
-        func notifiyAgain(container: NotificatorContainerView) {
+        func notifiyAgain(_ container: NotificatorContainerView) {
             container.addSubview(view)
             
-            container.opaque = false
+            container.isOpaque = false
             container.alpha = 0.0
-            container.hidden = false
+            container.isHidden = false
             rootView.addSubview(container)
             
             container.move(toInitialPosition: true)
@@ -44,12 +46,20 @@ internal extension UIApplication
             
             container.move(toInitialPosition: false)
             
-            UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.6, options: [.BeginFromCurrentState, .AllowUserInteraction, .LayoutSubviews], animations: {
+            UIView.animate(withDuration: 0.5,
+                           delay: 0.0,
+                           usingSpringWithDamping: 0.5,
+                           initialSpringVelocity: 0.6,
+                           options: [.beginFromCurrentState, .allowUserInteraction, .layoutSubviews],
+                           animations:
+            {
                 rootView.layoutIfNeeded()
-            }, completion: { [unowned self] (finished: Bool) in
+            },
+                           completion:
+            { [unowned self] (finished: Bool) in
                 if finished {
                     if expiration > 0 {
-                        NSTimer.startNotificationTimer(self, expiration)
+                        Timer.startNotificationTimer(self, expiration)
                     }
                 }
             })
@@ -63,9 +73,8 @@ internal extension UIApplication
         notifiyAgain(NotificatorContainerView())
     }
     
-    final func dismissNotification(animated: Bool = true) {
-        guard let view = self.notificatorView else { return }
-        guard let rootView = self.rootView else { return }
+    final func dismissNotification(_ animated: Bool = true) {
+        guard let view = self.notificatorView, let rootView = self.rootView else { return }
         
         view.move(toInitialPosition: true)
         
@@ -79,16 +88,22 @@ internal extension UIApplication
         }
         
         if animated {
-            UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.6, options: [.BeginFromCurrentState, .AllowUserInteraction, .LayoutSubviews], animations: animationBlock, completion: completionBlock)
+            UIView.animate(withDuration: 0.5,
+                           delay: 0.0,
+                           usingSpringWithDamping: 0.5,
+                           initialSpringVelocity: 0.6,
+                           options: [.beginFromCurrentState, .allowUserInteraction, .layoutSubviews],
+                           animations: animationBlock,
+                           completion: completionBlock)
             return
         }
         animationBlock()
         completionBlock(true)
     }
     
-    @objc final func handleNotificatorTimer(sender: NSTimer)
+    @objc final func handleNotificatorTimer(_ sender: Timer)
     {
-        NSTimer.stopNotificationTimer()
+        Timer.stopNotificationTimer()
         self.dismissNotification()
     }
 }
@@ -122,31 +137,31 @@ private class NotificatorContainerView: UIView {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        self.initialConstraint = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: superview, attribute: .Top, multiplier: 1, constant: 0)
+        self.initialConstraint = NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1, constant: 0)
         self.initialConstraint.priority = UILayoutPriorityDefaultLow
-        self.finalConstraint = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: superview, attribute: .Top, multiplier: 1, constant: 0)
+        self.finalConstraint = NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1, constant: 0)
         self.finalConstraint.priority = UILayoutPriorityDefaultLow
-        self.xConstraint = NSLayoutConstraint(item: self, attribute: .CenterX, relatedBy: .Equal, toItem: superview, attribute: .CenterX, multiplier: 1, constant: 0)
+        self.xConstraint = NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: superview, attribute: .centerX, multiplier: 1, constant: 0)
         self.xConstraint.priority = UILayoutPriorityRequired
         
-        self.compactWidthConstraint = NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal, toItem: superview, attribute: .Width, multiplier: 1, constant: 0)
+        self.compactWidthConstraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: superview, attribute: .width, multiplier: 1, constant: 0)
         self.compactWidthConstraint.priority = UILayoutPriorityDefaultLow
-        self.regularWidthConstraint = NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 414)
+        self.regularWidthConstraint = NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 414)
         self.regularWidthConstraint.priority = UILayoutPriorityDefaultLow
-        self.largeHeightConstraint = NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 64)
+        self.largeHeightConstraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 64)
         self.largeHeightConstraint.priority = UILayoutPriorityDefaultLow
-        self.smallHeightConstraint = NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 36)
+        self.smallHeightConstraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 36)
         self.smallHeightConstraint.priority = UILayoutPriorityDefaultLow
-        self.normalHeightConstraint = NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 44)
+        self.normalHeightConstraint = NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 44)
         self.normalHeightConstraint.priority = UILayoutPriorityDefaultLow
         
         self.traitCollectionDidChange(nil)
         
-        NSLayoutConstraint.activateConstraints([self.initialConstraint, self.finalConstraint, self.xConstraint, self.compactWidthConstraint, self.regularWidthConstraint, self.largeHeightConstraint, self.smallHeightConstraint, self.normalHeightConstraint])
+        NSLayoutConstraint.activate([self.initialConstraint, self.finalConstraint, self.xConstraint, self.compactWidthConstraint, self.regularWidthConstraint, self.largeHeightConstraint, self.smallHeightConstraint, self.normalHeightConstraint])
     }
     
     override func removeFromSuperview() {
-        NSLayoutConstraint.deactivateConstraints([self.initialConstraint, self.finalConstraint, self.xConstraint, self.compactWidthConstraint, self.regularWidthConstraint, self.largeHeightConstraint, self.smallHeightConstraint, self.normalHeightConstraint])
+        NSLayoutConstraint.deactivate([self.initialConstraint, self.finalConstraint, self.xConstraint, self.compactWidthConstraint, self.regularWidthConstraint, self.largeHeightConstraint, self.smallHeightConstraint, self.normalHeightConstraint])
         
         self.initialConstraint = nil
         self.finalConstraint = nil
@@ -160,17 +175,17 @@ private class NotificatorContainerView: UIView {
         super.removeFromSuperview()
     }
     
-    override func traitCollectionDidChange(previousTraitCollection: UITraitCollection?) {
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if let previous = previousTraitCollection {
             if previous.verticalSizeClass == self.traitCollection.verticalSizeClass && previous.horizontalSizeClass == self.traitCollection.horizontalSizeClass {
                 return
             }
         }
         
-        if self.traitCollection.verticalSizeClass == .Regular && self.traitCollection.horizontalSizeClass == .Regular { //iPad
+        if self.traitCollection.verticalSizeClass == .regular && self.traitCollection.horizontalSizeClass == .regular { //iPad
             self.compactWidthConstraint?.priority = UILayoutPriorityDefaultLow
             self.regularWidthConstraint?.priority = UILayoutPriorityDefaultHigh
-            if UIApplication.sharedApplication().statusBarHidden {
+            if UIApplication.shared.isStatusBarHidden {
                 self.largeHeightConstraint?.priority = UILayoutPriorityDefaultLow
                 self.smallHeightConstraint?.priority = UILayoutPriorityDefaultLow
                 self.normalHeightConstraint?.priority = UILayoutPriorityDefaultHigh
@@ -182,8 +197,8 @@ private class NotificatorContainerView: UIView {
         } else {
             self.compactWidthConstraint?.priority = UILayoutPriorityDefaultHigh
             self.regularWidthConstraint?.priority = UILayoutPriorityDefaultLow
-            if self.traitCollection.verticalSizeClass == .Regular || self.traitCollection.horizontalSizeClass == .Regular { //iPhone 6p
-                if UIApplication.sharedApplication().statusBarHidden {
+            if self.traitCollection.verticalSizeClass == .regular || self.traitCollection.horizontalSizeClass == .regular { //iPhone 6p
+                if UIApplication.shared.isStatusBarHidden {
                     self.largeHeightConstraint?.priority = UILayoutPriorityDefaultLow
                     self.smallHeightConstraint?.priority = UILayoutPriorityDefaultLow
                     self.normalHeightConstraint?.priority = UILayoutPriorityDefaultHigh
@@ -193,7 +208,7 @@ private class NotificatorContainerView: UIView {
                     self.normalHeightConstraint?.priority = UILayoutPriorityDefaultLow
                 }
             } else { //Remaining iPhones
-                if UIApplication.sharedApplication().statusBarHidden {
+                if UIApplication.shared.isStatusBarHidden {
                     self.largeHeightConstraint?.priority = UILayoutPriorityDefaultLow
                     self.smallHeightConstraint?.priority = UILayoutPriorityDefaultHigh
                     self.normalHeightConstraint?.priority = UILayoutPriorityDefaultLow
@@ -208,18 +223,22 @@ private class NotificatorContainerView: UIView {
 }
 
 
-private extension NSTimer
+private extension Timer
 {
-    static weak var notificationTimer: NSTimer?
+    static weak var forNotification: Timer?
     
-    static func startNotificationTimer(application: UIApplication, _ time: NSTimeInterval) {
+    static func startNotificationTimer(_ application: UIApplication, _ time: TimeInterval) {
         self.stopNotificationTimer()
         
-        self.notificationTimer = NSTimer.scheduledTimerWithTimeInterval(time, target: application, selector: #selector(UIApplication.handleNotificatorTimer(_:)), userInfo: nil, repeats: false)
+        self.forNotification = Timer.scheduledTimer(timeInterval: time,
+                                                    target: application,
+                                                    selector: #selector(UIApplication.handleNotificatorTimer(_:)),
+                                                    userInfo: nil,
+                                                    repeats: false)
     }
     
     static func stopNotificationTimer() {
-        self.notificationTimer?.invalidate()
-        self.notificationTimer = nil
+        self.forNotification?.invalidate()
+        self.forNotification = nil
     }
 }

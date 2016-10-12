@@ -1,8 +1,8 @@
-import Foundation
+import UIKit
 
 
 @objc public protocol Notificator: AnyObject {
-    func didTapNotification(notificatorView: NotificatorView)
+    func didTapNotification(_ notificatorView: NotificatorView)
 }
 
 
@@ -41,20 +41,20 @@ public class NotificatorView: UIView
         self.translatesAutoresizingMaskIntoConstraints = false
         
         self.notificatorConstraints = []
-        self.notificatorConstraints.append(NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal, toItem: superview, attribute: .Top, multiplier: 1, constant: 0))
-        self.notificatorConstraints.append(NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal, toItem: superview, attribute: .Bottom, multiplier: 1, constant: 0))
-        self.notificatorConstraints.append(NSLayoutConstraint(item: self, attribute: .Left, relatedBy: .Equal, toItem: superview, attribute: .Left, multiplier: 1, constant: 0))
-        self.notificatorConstraints.append(NSLayoutConstraint(item: self, attribute: .Right, relatedBy: .Equal, toItem: superview, attribute: .Right, multiplier: 1, constant: 0))
+        self.notificatorConstraints.append(NSLayoutConstraint(item: self, attribute: .top, relatedBy: .equal, toItem: superview, attribute: .top, multiplier: 1, constant: 0))
+        self.notificatorConstraints.append(NSLayoutConstraint(item: self, attribute: .bottom, relatedBy: .equal, toItem: superview, attribute: .bottom, multiplier: 1, constant: 0))
+        self.notificatorConstraints.append(NSLayoutConstraint(item: self, attribute: .left, relatedBy: .equal, toItem: superview, attribute: .left, multiplier: 1, constant: 0))
+        self.notificatorConstraints.append(NSLayoutConstraint(item: self, attribute: .right, relatedBy: .equal, toItem: superview, attribute: .right, multiplier: 1, constant: 0))
         
-        NSLayoutConstraint.activateConstraints(self.notificatorConstraints)
+        NSLayoutConstraint.activate(self.notificatorConstraints)
         
         self.tap = UITapGestureRecognizer(target: self, action: #selector(NotificatorView.handleGestures(_:)))
         self.swipe = UISwipeGestureRecognizer(target: self, action: #selector(NotificatorView.handleGestures(_:)))
-        self.swipe.direction = .Up
+        self.swipe.direction = .up
     }
     
     public override func removeFromSuperview() {
-        NSLayoutConstraint.deactivateConstraints(self.notificatorConstraints)
+        NSLayoutConstraint.deactivate(self.notificatorConstraints)
         
         self.tap = nil
         self.swipe = nil
@@ -64,17 +64,17 @@ public class NotificatorView: UIView
         super.removeFromSuperview()
     }
     
-    @objc final func handleGestures(sender: UIGestureRecognizer) {
+    @objc final func handleGestures(_ sender: UIGestureRecognizer) {
         if sender == self.tap {
-            dispatch_async(dispatch_get_main_queue()) { [unowned self] () -> Void in
+            DispatchQueue.main.async { [unowned self] () -> Void in
                 self.notificator?.didTapNotification(self)
             }
             if !self.dismissesWithTap {
                 return
             }
         }
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            UIApplication.sharedApplication().dismissNotification()
+        DispatchQueue.main.async { () -> Void in
+            UIApplication.shared.dismissNotification()
         }
     }
 }
@@ -86,16 +86,16 @@ public extension UIViewController
         return UIApplication.notifying
     }
     
-    public final func notify(view: NotificatorView, expiringAfter expiration: NSTimeInterval = 0) {
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            UIApplication.sharedApplication().notify(view, expiration)
+    public final func notify(view: NotificatorView, expiringAfter expiration: TimeInterval = 0) {
+        DispatchQueue.main.async { () -> Void in
+            UIApplication.shared.notify(view, expiration)
         }
     }
     
     public final func dismissNotification() {
         if !self.notifying { return }
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            UIApplication.sharedApplication().dismissNotification()
+        DispatchQueue.main.async { () -> Void in
+            UIApplication.shared.dismissNotification()
         }
     }
 }

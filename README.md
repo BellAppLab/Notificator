@@ -6,7 +6,20 @@ _v0.3.0_
 
 ## Usage
 
+```swift
+@IBAction func show(_ sender: UIButton) {
+    let view = NotificatorView()
+    view.dismissesWithTap = false
+    view.notificator = self
+    view.backgroundColor = UIColor.green
+    self.notify(view: view,
+                expiringAfter: 1)
+}
 
+func didTapNotification(_ notificatorView: NotificatorView) {
+    print("Did tap")
+}
+```
 
 ## Requirements
 

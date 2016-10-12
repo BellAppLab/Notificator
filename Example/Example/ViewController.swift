@@ -1,28 +1,54 @@
 import UIKit
 
 
-class ViewController: UIViewController, Notificator {
+class StatusBarViewController: UIViewController, Notificator {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.setNeedsStatusBarAppearanceUpdate()
     }
     
-//    override func prefersStatusBarHidden() -> Bool {
-//        return true
-//    }
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
     
-    @IBAction func show(sender: UIButton) {
+    @IBAction func show(_ sender: UIButton) {
         let view = NotificatorView()
         view.dismissesWithTap = false
         view.notificator = self
-        view.backgroundColor = UIColor.greenColor()
-        self.notify(view)
-//        self.notify(view, expiringAfter: 1)
+        view.backgroundColor = UIColor.green
+        self.notify(view: view,
+                    expiringAfter: 1)
     }
 
-    func didTapNotification(notificatorView: NotificatorView) {
+    func didTapNotification(_ notificatorView: NotificatorView) {
+        print("Did tap")
+    }
+}
+
+
+class NoStatusBarViewController: UIViewController, Notificator {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    @IBAction func show(_ sender: UIButton) {
+        let view = NotificatorView()
+        view.dismissesWithTap = true
+        view.notificator = self
+        view.backgroundColor = UIColor.yellow
+        self.notify(view: view)
+    }
+    
+    func didTapNotification(_ notificatorView: NotificatorView) {
         print("Did tap")
     }
 }
